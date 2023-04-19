@@ -1,6 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
-import React, { useState } from 'react';
-import './launches.css';
+import React, { useState } from 'react'
 
 const GET_LAUNCHES = gql`
   query GetLaunches {
@@ -43,7 +42,7 @@ function Launches() {//處理、顯示資料
   if (error) return <p>Error: {error.message}</p>;
 
   const sortedData = [...data.launches]
-    .filter((launch) => { //搜索
+    .filter((launch) => { //搜索 Mission Name	,Rocket Name, Rocket Type	的內容
       const searchTextLower = searchText.toLowerCase();
       return (
         launch.mission_name.toLowerCase().includes(searchTextLower) ||
@@ -51,7 +50,7 @@ function Launches() {//處理、顯示資料
         launch.rocket.rocket_type.toLowerCase().includes(searchTextLower)
       );
     })
-    .sort((a, b) => {//排序資料（整個） 如果可以我認為請後端給我排序好的資料比較好，例如GET_decrease，不然前端處理佔空間。
+    .sort((a, b) => {//排序資料（整個） 如果可以我認為請後端給我排序好的資料比較好，不然前端處理佔空間。
       const direction = sortDirection === 'asc' ? 1 : -1;
       const columnA = a[sortColumn];
       const columnB = b[sortColumn];
@@ -62,7 +61,7 @@ function Launches() {//處理、顯示資料
         return 1 * direction;
       }
       return 0;
-    })
+    });
     
   const currentLaunches = sortedData.slice((currentPage - 1) * pageSize, currentPage * pageSize);//取得目前頁面顯示的資料
 
